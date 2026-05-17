@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ML CODEX — Mobile Legends: Bang Bang Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c14;
+    --surface: #0e1520;
+    --surface2: #141d2b;
+    --border: #1e2d45;
+    --gold: #f0a500;
+    --gold2: #ffd060;
+    --blue: #00c8ff;
+    --blue2: #0084c8;
+    --red: #ff3c3c;
+    --green: #00e87a;
+    --text: #e8eef8;
+    --muted: #6a7d96;
+    --accent: #1a2a3f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ═══════════════════════════════ NAV ═══════════════════════════════ */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    background: rgba(8,12,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.6rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-logo span {
+    color: var(--blue);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--gold);
+    background: rgba(240,165,0,0.08);
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: rgba(8,12,20,0.98);
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+    z-index: 998;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobile-menu a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .mobile-menu a:hover { color: var(--gold); background: rgba(240,165,0,0.08); }
+  .mobile-menu.open { display: flex; }
+
+  /* ═══════════════════════════════ SECTIONS ═══════════════════════════════ */
+  section {
+    display: none;
+    min-height: 100vh;
+    padding-top: 60px;
+  }
+
+  section.active { display: block; }
+
+  /* ═══════════════════════════════ HERO ═══════════════════════════════ */
+  #home {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,200,255,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 50%, rgba(240,165,0,0.05) 0%, transparent 60%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 40px,
+        rgba(30,45,69,0.2) 40px,
+        rgba(30,45,69,0.2) 41px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 40px,
+        rgba(30,45,69,0.2) 40px,
+        rgba(30,45,69,0.2) 41px
+      );
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 80px 24px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(0,200,255,0.1);
+    border: 1px solid rgba(0,200,255,0.3);
+    color: var(--blue);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(4rem, 15vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--gold2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+
+  .hero-subtitle {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    letter-spacing: 8px;
+    color: var(--blue);
+    margin-bottom: 24px;
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    font-weight: 500;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #000;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(240,165,0,0.3); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--blue);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 13px 32px;
+    border: 1px solid var(--blue);
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { background: rgba(0,200,255,0.1); transform: translateY(-2px); }
+
+  /* ─── Stats Bar ─── */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 60px auto 0;
+    max-width: 800px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .stat-item {
+    flex: 1;
+    padding: 20px 16px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* ─── Quick Cards ─── */
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    letter-spacing: 4px;
+    color: var(--text);
+  }
+
+  .section-title span { color: var(--gold); }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .quick-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quick-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--blue));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .quick-card:hover::before { transform: scaleX(1); }
+
+  .quick-card:hover {
+    border-color: rgba(240,165,0,0.3);
+    transform: translateY(-4px);
+    background: var(--surface2);
+  }
+
+  .quick-card-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .quick-card-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .quick-card-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ─── Tier Banner ─── */
+  .tier-banner {
+    background: linear-gradient(135deg, var(--surface) 0%, var(--accent) 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px 32px;
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .tier-banner-text h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.2rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .tier-banner-text p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .tier-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tier-pill {
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .tier-s { background: rgba(255,60,60,0.15); border: 1px solid rgba(255,60,60,0.4); color: #ff6b6b; }
+  .tier-a { background: rgba(240,165,0,0.15); border: 1px solid rgba(240,165,0,0.4); color: var(--gold); }
+  .tier-b { background: rgba(0,200,255,0.1); border: 1px solid rgba(0,200,255,0.3); color: var(--blue); }
+  .tier-c { background: rgba(106,125,150,0.1); border: 1px solid rgba(106,125,150,0.3); color: var(--muted); }
+
+  /* ═══════════════════════════════ HEROES ═══════════════════════════════ */
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(240,165,0,0.08);
+  }
+
+  .heroes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .hero-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    box-shadow: 0 8px 32px rgba(240,165,0,0.12);
+  }
+
+  .hero-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--surface) 0%, transparent 60%);
+  }
+
+  .hero-tier-badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    z-index: 1;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+
+  .hero-card-body {
+    padding: 12px 14px 14px;
+  }
+
+  .hero-card-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .hero-card-role {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .hero-card-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  .tag-meta { background: rgba(106,125,150,0.2); color: var(--muted); }
+  .tag-burst { background: rgba(255,60,60,0.15); color: #ff8080; }
+  .tag-tank { background: rgba(0,200,255,0.1); color: var(--blue); }
+  .tag-sup { background: rgba(0,232,122,0.12); color: var(--green); }
+  .tag-jungle { background: rgba(240,165,0,0.12); color: var(--gold); }
+
+  /* ─── Hero Detail Modal ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    max-width: 640px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modal-hero-icon {
+    font-size: 3rem;
+    width: 72px;
+    height: 72px;
+    background: var(--surface2);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .modal-hero-info h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+
+  .modal-hero-info p {
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 1.2rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { border-color: var(--red); color: var(--red); }
+
+  .modal-body { padding: 24px 28px 28px; }
+
+  .modal-body h4 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--blue);
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .modal-body h4:first-child { margin-top: 0; }
+
+  .stat-bars { display: flex; flex-direction: column; gap: 8px; }
+
+  .stat-row { display: flex; align-items: center; gap: 12px; }
+
+  .stat-row-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    width: 80px;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .stat-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold2));
+    transition: width 0.5s ease;
+  }
+
+  .stat-row-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
+    width: 30px;
+    text-align: right;
+  }
+
+  .tip-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+
+  .tip-list li {
+    font-size: 0.92rem;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+    font-weight: 500;
+  }
+
+  .tip-list li::before {
+    content: '▸';
+    color: var(--gold);
+    position: absolute;
+    left: 0;
+    font-size: 0.8rem;
+  }
+
+  .skill-grid { display: flex; flex-direction: column; gap: 10px; }
+
+  .skill-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+
+  .skill-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 36px;
+    text-align: center;
+  }
+
+  .skill-info h5 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .skill-info p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  /* ═══════════════════════════════ BUILD ═══════════════════════════════ */
+  .build-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .build-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+
+  .build-card:hover {
+    border-color: rgba(0,200,255,0.3);
+    transform: translateY(-3px);
+  }
+
+  .build-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .build-hero-icon {
+    font-size: 2rem;
+    width: 52px;
+    height: 52px;
+    background: var(--surface);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .build-hero-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+
+  .build-hero-type {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .build-card-body { padding: 18px 20px; }
+
+  .build-items {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .build-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    text-align: center;
+    min-width: 60px;
+    cursor: help;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .build-item:hover { border-color: var(--gold); }
+
+  .build-item-icon { font-size: 1.3rem; display: block; }
+
+  .build-item-name {
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    display: block;
+    margin-top: 3px;
+    line-height: 1.3;
+    max-width: 64px;
+  }
+
+  .build-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 8px;
+  }
+
+  .build-note {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.6;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .emblem-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .emblem-badge {
+    background: rgba(0,200,255,0.1);
+    border: 1px solid rgba(0,200,255,0.2);
+    color: var(--blue);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  .spell-badge {
+    background: rgba(240,165,0,0.1);
+    border: 1px solid rgba(240,165,0,0.2);
+    color: var(--gold);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+
+  /* ═══════════════════════════════ TUTORIAL ═══════════════════════════════ */
+  .tutorial-nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+  }
+
+  .tut-tab {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tut-tab.active, .tut-tab:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: rgba(0,200,255,0.08);
+  }
+
+  .tut-content { display: none; }
+  .tut-content.active { display: block; }
+
+  .tut-steps { display: flex; flex-direction: column; gap: 20px; }
+
+  .tut-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 24px;
+    transition: all 0.2s;
+  }
+
+  .tut-step:hover { border-color: rgba(0,200,255,0.25); }
+
+  .step-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--gold);
+    opacity: 0.25;
+    flex-shrink: 0;
+    width: 40px;
+  }
+
+  .step-body h3 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .step-body p {
+    color: var(--muted);
+    font-size: 0.93rem;
+    font-weight: 500;
+    line-height: 1.7;
+  }
+
+  .tip-box {
+    background: rgba(240,165,0,0.06);
+    border: 1px solid rgba(240,165,0,0.2);
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-top: 12px;
+    font-size: 0.88rem;
+    color: var(--gold2);
+    font-weight: 500;
+  }
+
+  .tip-box strong { color: var(--gold); }
+
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .glossary-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+
+  .glossary-term {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--blue);
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+
+  .glossary-def {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .role-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 20px;
+    transition: all 0.2s;
+  }
+
+  .role-card:hover { transform: translateY(-3px); border-color: var(--border); }
+
+  .role-icon { font-size: 2.4rem; margin-bottom: 12px; }
+
+  .role-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .role-desc {
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-weight: 500;
+    line-height: 1.7;
+  }
+
+  .recommend-list {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .recommend-chip {
+    background: rgba(240,165,0,0.1);
+    border: 1px solid rgba(240,165,0,0.2);
+    color: var(--gold);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ═══════════════════════════════ FOOTER ═══════════════════════════════ */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 24px;
+    text-align: center;
+    background: var(--surface);
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .footer-logo span { color: var(--blue); }
+
+  footer p {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  footer .disclaimer {
+    margin-top: 16px;
+    font-size: 0.72rem;
+    color: #3a4a5a;
+  }
+
+  /* ═══════════════════════════════ RESPONSIVE ═══════════════════════════════ */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .tier-banner { grid-template-columns: 1fr; gap: 20px; }
+    .stats-bar { flex-direction: column; }
+    .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-item:last-child { border-bottom: none; }
+    .modal-body { padding: 20px; }
+    .modal-header { padding: 20px 20px 16px; }
+    .tut-step { flex-direction: column; gap: 8px; }
+    .step-num { width: auto; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-content { padding: 60px 16px 40px; }
+    .container { padding: 40px 16px; }
+    .heroes-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  }
+
+  /* ═══════════════════════════════ ANIMATIONS ═══════════════════════════════ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  .fade-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .fade-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .fade-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
+  .fade-up-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+  @keyframes pulse-border {
+    0%, 100% { border-color: var(--border); }
+    50% { border-color: rgba(240,165,0,0.4); }
+  }
+
+  .pulse { animation: pulse-border 3s infinite; }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showSection('home')">ML<span>CODEX</span></a>
+  <ul class="nav-links">
+    <li><a href="#" class="active" onclick="showSection('home',this)">Home</a></li>
+    <li><a href="#" onclick="showSection('heroes',this)">Heroes</a></li>
+    <li><a href="#" onclick="showSection('builds',this)">Builds</a></li>
+    <li><a href="#" onclick="showSection('tutorial',this)">Tutorial</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showSection('home');toggleMenu()">🏠 Home</a>
+  <a href="#" onclick="showSection('heroes');toggleMenu()">⚔️ Heroes</a>
+  <a href="#" onclick="showSection('builds');toggleMenu()">🛡️ Builds</a>
+  <a href="#" onclick="showSection('tutorial');toggleMenu()">📖 Tutorial</a>
+</div>
+
+<!-- ═══════ HOME ═══════ -->
+<section id="home" class="active">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge fade-up">⚡ Season 2025 — Updated Meta</div>
+    <h1 class="hero-title fade-up fade-up-delay-1">ML<br>CODEX</h1>
+    <div class="hero-subtitle fade-up fade-up-delay-2">Bang Bang Guide</div>
+    <p class="hero-desc fade-up fade-up-delay-3">The definitive Mobile Legends strategy hub. Master every hero, optimize your builds, and climb to Mythic Glory.</p>
+    <div class="hero-cta fade-up fade-up-delay-4">
+      <a href="#" class="btn-primary" onclick="showSection('heroes')">Explore Heroes</a>
+      <a href="#" class="btn-outline" onclick="showSection('tutorial')">New Player Guide</a>
+    </div>
+    <div class="stats-bar fade-up fade-up-delay-4">
+      <div class="stat-item">
+        <div class="stat-num">120+</div>
+        <div class="stat-label">Heroes Covered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">S25</div>
+        <div class="stat-label">Current Season</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6</div>
+        <div class="stat-label">Roles</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Free</div>
+        <div class="stat-label">Always</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Navigate</div>
+      <h2 class="section-title">Explore <span>Guides</span></h2>
+    </div>
+    <div class="quick-grid">
+      <div class="quick-card" onclick="showSection('heroes')">
+        <div class="quick-card-icon">⚔️</div>
+        <div class="quick-card-title">Hero Tier List</div>
+        <div class="quick-card-desc">Browse all heroes ranked by current meta strength, filtered by role.</div>
+      </div>
+      <div class="quick-card" onclick="showSection('builds')">
+        <div class="quick-card-icon">🛡️</div>
+        <div class="quick-card-title">Item Builds</div>
+        <div class="quick-card-desc">Optimized gear setups for every playstyle with emblem and spell combos.</div>
+      </div>
+      <div class="quick-card" onclick="showSection('tutorial')">
+        <div class="quick-card-icon">📖</div>
+        <div class="quick-card-title">Beginner Guide</div>
+        <div class="quick-card-desc">From your very first match to ranked basics — everything you need to start winning.</div>
+      </div>
+      <div class="quick-card" onclick="showSection('tutorial')">
+        <div class="quick-card-icon">🗺️</div>
+        <div class="quick-card-title">Map Tactics</div>
+        <div class="quick-card-desc">Lane assignments, jungle routes, and objective control strategies explained.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;">
+      <div class="tier-banner pulse">
+        <div class="tier-banner-text">
+          <h3>Current Meta Snapshot</h3>
+          <p>Season 25 meta favors burst mages and aggressive fighters. Tanks remain essential for ranked play. Healers are back in the meta after emblem updates.</p>
+        </div>
+        <div>
+          <div style="margin-bottom:10px; font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:2px; color:var(--muted);">TIER RATINGS</div>
+          <div class="tier-pills">
+            <span class="tier-pill tier-s">S — God Tier</span>
+            <span class="tier-pill tier-a">A — Strong Pick</span>
+            <span class="tier-pill tier-b">B — Viable</span>
+            <span class="tier-pill tier-c">C — Situational</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">ML<span>CODEX</span></div>
+    <p>Your complete Mobile Legends: Bang Bang strategy resource. Stay sharp, climb ranks, dominate the Land of Dawn.</p>
+    <p class="disclaimer">ML CODEX is a fan-made guide site. Not affiliated with Moonton or Mobile Legends: Bang Bang.</p>
+  </footer>
+</section>
+
+<!-- ═══════ HEROES ═══════ -->
+<section id="heroes">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Season 25 Tier List</div>
+      <h2 class="section-title">Hero <span>Roster</span></h2>
+    </div>
+    <div class="filter-row" id="heroFilters">
+      <button class="filter-btn active" onclick="filterHeroes('all', this)">All Roles</button>
+      <button class="filter-btn" onclick="filterHeroes('Mage', this)">Mage</button>
+      <button class="filter-btn" onclick="filterHeroes('Marksman', this)">Marksman</button>
+      <button class="filter-btn" onclick="filterHeroes('Fighter', this)">Fighter</button>
+      <button class="filter-btn" onclick="filterHeroes('Tank', this)">Tank</button>
+      <button class="filter-btn" onclick="filterHeroes('Assassin', this)">Assassin</button>
+      <button class="filter-btn" onclick="filterHeroes('Support', this)">Support</button>
+    </div>
+    <div class="heroes-grid" id="heroesGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════ BUILDS ═══════ -->
+<section id="builds">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Season 25 Optimized</div>
+      <h2 class="section-title">Item <span>Builds</span></h2>
+    </div>
+    <div class="build-grid" id="buildsGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════ TUTORIAL ═══════ -->
+<section id="tutorial">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">// Learning Center</div>
+      <h2 class="section-title">Beginner <span>Guide</span></h2>
+    </div>
+    <div class="tutorial-nav">
+      <button class="tut-tab active" onclick="showTutTab('basics', this)">Game Basics</button>
+      <button class="tut-tab" onclick="showTutTab('roles', this)">Hero Roles</button>
+      <button class="tut-tab" onclick="showTutTab('map', this)">Map & Objectives</button>
+      <button class="tut-tab" onclick="showTutTab('ranked', this)">Ranked Tips</button>
+      <button class="tut-tab" onclick="showTutTab('glossary', this)">Glossary</button>
+    </div>
+
+    <!-- Basics -->
+    <div class="tut-content active" id="tab-basics">
+      <div class="tut-steps">
+        <div class="tut-step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h3>Understanding the Goal</h3>
+            <p>Mobile Legends is a 5v5 MOBA where two teams compete to destroy each other's base (the Nexus tower). A match typically lasts 10–20 minutes. Three lanes — Gold Lane, Mid Lane, and Exp Lane — connect the bases, flanked by a jungle area full of camps to farm.</p>
+            <div class="tip-box"><strong>💡 Tip:</strong> Your main objective is always the enemy's base. Kills and farm are tools — not the goal itself.</div>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h3>Picking Your First Hero</h3>
+            <p>Start with a Tank or Fighter — they're forgiving when you make mistakes. Layla (Marksman) and Tigreal (Tank) are excellent free picks for newcomers. Avoid complex heroes like Fanny or Lancelot until you understand the game flow.</p>
+            <div class="tip-box"><strong>💡 Tip:</strong> Play 20+ matches on a single hero before switching. Mastery beats variety in solo queue.</div>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h3>Last Hitting &amp; Gold Farming</h3>
+            <p>Gold comes primarily from minion kills (last hits) and jungle camps. Stay in lane and farm consistently in the early game. Don't chase kills across the map — a fed carry wins games, not a roaming player who misses 50 minions.</p>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <h3>Buying the Right Items</h3>
+            <p>Use pre-made build templates until you understand each item's function. The in-game recommendation system is decent for beginners. Learn which items counter physical vs magical damage — Athena's Shield for magic, Antique Cuirass for physical.</p>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <h3>Communication &amp; Pings</h3>
+            <p>Use the ping system constantly. "On my way!" keeps teammates from making bad calls. Ping missing enemies so your team plays cautiously. Never flame your team — a positive mindset statistically wins more games.</p>
+            <div class="tip-box"><strong>💡 Tip:</strong> Double-tap the minimap to ping danger quickly. It takes half a second and can save a teammate's life.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roles -->
+    <div class="tut-content" id="tab-roles">
+      <div class="role-grid">
+        <div class="role-card">
+          <div class="role-icon">🛡️</div>
+          <div class="role-name">Tank</div>
+          <div class="role-desc">High durability frontliners who absorb damage and initiate teamfights. They protect carries and enable aggressive plays. Tanks excel in ranked because they can solo-carry coordination-wise.</div>
+          <div class="recommend-list">
+            <span class="recommend-chip">Tigreal</span>
+            <span class="recommend-chip">Hylos</span>
+            <span class="recommend-chip">Grock</span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">⚔️</div>
+          <div class="role-name">Fighter</div>
+          <div class="role-desc">Melee bruisers with a mix of damage and durability. They dominate the Exp Lane (top lane), thrive in 1v1 duels, and can split-push towers. Good for players who want to carry through skirmishes.</div>
+          <div class="recommend-list">
+            <span class="recommend-chip">Leomord</span>
+            <span class="recommend-chip">Khaleed</span>
+            <span class="recommend-chip">Thamuz</span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">🗡️</div>
+          <div class="role-name">Assassin</div>
+          <div class="role-desc">High burst damage dealers who jungle and roam. They target squishy backlines and snowball early kills into map control. High skill ceiling — one death early can derail your whole game.</div>
+          <div class="recommend-list">
+            <span class="recommend-chip">Alucard</span>
+            <span class="recommend-chip">Hayabusa</span>
+            <span class="recommend-chip">Ling</span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">🔮</div>
+          <div class="role-name">Mage</div>
+          <div class="role-desc">Magic damage casters who control the mid lane and teamfights with AoE spells and crowd control. They counter physical-heavy teams and can burst down tanks with the right build.</div>
+          <div class="recommend-list">
+            <span class="recommend-chip">Eudora</span>
+            <span class="recommend-chip">Kagura</span>
+            <span class="recommend-chip">Lunox</span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">🏹</div>
+          <div class="role-name">Marksman</div>
+          <div class="role-desc">Ranged carries who farm the Gold Lane and scale into late-game powerhouses. Weak early but unstoppable when fed. Requires good positioning — stand behind your tank and never dive into enemies.</div>
+          <div class="recommend-list">
+            <span class="recommend-chip">Layla</span>
+            <span class="recommend-chip">Miya</span>
+            <span class="recommend-chip">Beatrix</span>
+          </div>
+        </div>
+        <div class="role-card">
+          <div class="role-icon">✨</div>
+          <div class="role-name">Support</div>
+          <div class="role-desc">Utility heroes who heal, shield, and buff teammates. They roam and enable plays across all lanes. Underrated in solo queue — a good Support can swing teamfights single-handedly.</div>
+          <div class="recommend-list">
+            <span class="recommend-chip">Estes</span>
+            <span class="recommend-chip">Angela</span>
+            <span class="recommend-chip">Rafaela</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div class="tut-content" id="tab-map">
+      <div class="tut-steps">
+        <div class="tut-step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h3>The Three Lanes</h3>
+            <p><strong style="color:var(--gold)">Gold Lane (Bottom):</strong> Primary farming lane for Marksmen. Focus on last-hitting minions and scaling into late game.<br><br>
+            <strong style="color:var(--blue)">Mid Lane:</strong> Mages and some Assassins control this lane. Mid has the fastest roaming access to both side lanes — always help when you can.<br><br>
+            <strong style="color:var(--green)">Exp Lane (Top):</strong> Fighters and Tanks earn experience here. Winning this lane puts pressure on the enemy's side objectives.</p>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h3>The Jungle &amp; Key Camps</h3>
+            <p>The jungle Assassin farms monster camps for gold and buffs. Key camps include:</p>
+            <ul class="tip-list" style="margin-top:10px;">
+              <li><strong style="color:var(--red)">Lord (8min+)</strong> — Grants a powerful lane-pushing siege buff to your team. Highest priority objective after 8 minutes.</li>
+              <li><strong style="color:var(--blue)">Turtle (2min)</strong> — Gives your whole team a shield. Contest every turtle spawn.</li>
+              <li><strong style="color:var(--gold)">Blue/Red Buff</strong> — Reduces cooldowns (Blue) or adds slow/burn to attacks (Red). Crucial for junglers.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h3>Rotating &amp; Roaming</h3>
+            <p>After clearing your wave, don't just stand in lane. Rotate to help teammates, counter-jungle the enemy, or take an uncontested objective. Map presence wins games — a frozen lane is wasted gold.</p>
+            <div class="tip-box"><strong>💡 Tip:</strong> Always clear your minion wave BEFORE rotating. Never rotate on a full wave — you'll lose 200+ gold in seconds.</div>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <h3>Vision &amp; Map Awareness</h3>
+            <p>Check the minimap every 5–10 seconds. If you can't see 3+ enemies, back off or play safe. Buy Observer Wards (free in some modes) to deny enemy vision around Lord and Turtle spawns. Vision wins objectives.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ranked -->
+    <div class="tut-content" id="tab-ranked">
+      <div class="tut-steps">
+        <div class="tut-step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h3>Rank System Overview</h3>
+            <p>Ranks from lowest to highest: Warrior → Elite → Master → Grandmaster → Epic → Legend → Mythic → Mythical Glory. Each rank requires winning matches to earn stars. Losing costs a star. Don't play ranked on tilt.</p>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h3>Hero Pool Strategy</h3>
+            <p>Master 2–3 heroes across 2 different roles. If someone takes your main, you have a backup. Don't queue ranked with a hero you've never played. Practice in Classic first.</p>
+            <div class="tip-box"><strong>💡 Tip:</strong> Small hero pool = more consistent performance = faster rank climbing. Pro players often main 2–3 heroes their entire career.</div>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h3>When to Take Fights</h3>
+            <p>Only engage when you have a numbers advantage, key cooldowns available, or an objective to contest. Never fight 4v5. Never chase a low-HP enemy into their base. Take the tower instead.</p>
+          </div>
+        </div>
+        <div class="tut-step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <h3>Mental &amp; Session Management</h3>
+            <p>Play a maximum of 3 ranked games per session if you're losing. Take breaks between losses. Turn off chat if you're getting tilted. Your win rate improves when you play calm and focused.</p>
+            <div class="tip-box"><strong>💡 Tip:</strong> Queue during peak hours (evenings, weekends) for better matchmaking quality and more experienced teammates.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glossary -->
+    <div class="tut-content" id="tab-glossary">
+      <div class="glossary-grid">
+        <div class="glossary-item"><div class="glossary-term">GANK</div><div class="glossary-def">When a roaming player (usually jungler) ambushes an enemy in a lane to secure a kill.</div></div>
+        <div class="glossary-item"><div class="glossary-term">FEED</div><div class="glossary-def">Dying repeatedly to the same enemy, giving them free gold and level advantages.</div></div>
+        <div class="glossary-item"><div class="glossary-term">CC (Crowd Control)</div><div class="glossary-def">Any ability that stuns, slows, silences, or displaces enemies — crucial in teamfights.</div></div>
+        <div class="glossary-item"><div class="glossary-term">POKE</div><div class="glossary-def">Dealing chip damage from a safe distance to wear down enemies before engaging.</div></div>
+        <div class="glossary-item"><div class="glossary-term">SNOWBALL</div><div class="glossary-def">Gaining a lead early and using it to dominate the rest of the game.</div></div>
+        <div class="glossary-item"><div class="glossary-term">SPLIT PUSH</div><div class="glossary-def">Pushing a lane alone while your team pressures another part of the map.</div></div>
+        <div class="glossary-item"><div class="glossary-term">KITE</div><div class="glossary-def">Attacking while moving to stay out of enemy melee range — essential for Marksmen.</div></div>
+        <div class="glossary-item"><div class="glossary-term">ROTATION</div><div class="glossary-def">Moving between lanes to assist teammates or take objectives after clearing your own lane.</div></div>
+        <div class="glossary-item"><div class="glossary-term">DIVE</div><div class="glossary-def">Attacking enemies under their own tower, risking taking tower damage to secure kills.</div></div>
+        <div class="glossary-item"><div class="glossary-term">RECALL / BASE</div><div class="glossary-def">Returning to your base to restore HP/Mana and buy items. Don't recall when visible to enemies.</div></div>
+        <div class="glossary-item"><div class="glossary-term">BURST</div><div class="glossary-def">Dealing a massive amount of damage in a very short time, usually to instantly eliminate targets.</div></div>
+        <div class="glossary-item"><div class="glossary-term">SUSTAIN</div><div class="glossary-def">Lifesteal, regeneration, or healing effects that keep you alive in extended fights.</div></div>
+        <div class="glossary-item"><div class="glossary-term">PEEL</div><div class="glossary-def">Using CC or body-blocking to protect a carry from being killed by enemy assassins.</div></div>
+        <div class="glossary-item"><div class="glossary-term">ADC / Carry</div><div class="glossary-def">The primary damage-dealing Marksman who is "carried" early and scales to carry late.</div></div>
+        <div class="glossary-item"><div class="glossary-term">ZONE</div><div class="glossary-def">Threatening an area to prevent enemies from entering it, controlling space without dealing damage.</div></div>
+        <div class="glossary-item"><div class="glossary-term">ENGAGE / DISENGAGE</div><div class="glossary-def">Initiating a fight (engage) or retreating from one safely (disengage). Timing is everything.</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════ HERO MODAL ═══════ -->
+<div class="modal-overlay" id="heroModal" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-hero-icon" id="modalIcon"></div>
+      <div class="modal-hero-info">
+        <h2 id="modalName"></h2>
+        <p id="modalRole"></p>
+      </div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════ DATA ═══════════════════════════════
+
+const heroes = [
+  {
+    id: 1, name: "Kagura", role: "Mage", tier: "S", icon: "🔮",
+    bg: "linear-gradient(135deg, #1a0a2e, #2d0a4e)",
+    tags: ["burst", "meta"],
+    stats: { offense: 95, mobility: 78, difficulty: 85, utility: 70 },
+    desc: "One of the most skill-expressive mages in the game. Her umbrella mechanic allows unparalleled repositioning and burst potential.",
+    tips: ["Phase-swap timing is the key to surviving ganks", "Use P2 to reset your umbrella cooldown in fights", "Always have an escape route planned before engaging", "Combo: Skill 2 → Skill 1 → Skill 3 for maximum burst"],
+    skills: [
+      { icon: "☂️", name: "Seimei Umbrella Open", desc: "Throws umbrella dealing magic damage and slowing enemies in an AoE." },
+      { icon: "🌸", name: "Rasho Umbrella Flee", desc: "Dashes to or from the umbrella, leaving a barrier that blocks projectiles." },
+      { icon: "⚡", name: "Yin Yang Overturn", desc: "Massive AoE ultimate that deals heavy magic damage and pulls the umbrella back." }
+    ]
+  },
+  {
+    id: 2, name: "Ling", role: "Assassin", tier: "S", icon: "🗡️",
+    bg: "linear-gradient(135deg, #0a1a2e, #0a2e1a)",
+    tags: ["burst", "meta"],
+    stats: { offense: 92, mobility: 98, difficulty: 92, utility: 40 },
+    desc: "Arguably the most mobile hero in the game. Ling leaps between walls and can become untargetable with his ultimate.",
+    tips: ["Farm blue buff to maintain energy for wall jumps", "Ultimate gives invincibility — use it to dodge AoE ultimates", "Gank from unexpected angles by using terrain", "Chase enemies with Defiant Sword for execute damage"],
+    skills: [
+      { icon: "🧱", name: "Finch Poise", desc: "Passive that allows Ling to leap onto walls and regenerate energy while on them." },
+      { icon: "⚔️", name: "Defiant Sword", desc: "Charges and releases a sword slash, dealing heavy burst damage to one target." },
+      { icon: "❄️", name: "Tempest of Blades", desc: "Leaps into the air, becoming untargetable, then crashes down and summons deadly blades." }
+    ]
+  },
+  {
+    id: 3, name: "Tigreal", role: "Tank", tier: "A", icon: "🛡️",
+    bg: "linear-gradient(135deg, #1a1a0a, #2e200a)",
+    tags: ["tank", "meta"],
+    stats: { offense: 45, mobility: 50, difficulty: 35, utility: 92 },
+    desc: "The quintessential beginner tank. Tigreal's crowd control chain is one of the most impactful in the game and carries team fights.",
+    tips: ["Always combo: Skill 1 → Ultimate → Skill 2 for a 3-man stun chain", "Wait for enemies to cluster before engaging", "Stay near your carries and peel — don't overextend", "Use Arrival emblem talent for fast rotations"],
+    skills: [
+      { icon: "⚡", name: "Attack Wave", desc: "Fires a shockwave that deals damage and pushes enemies toward Tigreal." },
+      { icon: "🔱", name: "Sacred Hammer", desc: "Charges in a direction and smashes into terrain, stunning nearby enemies." },
+      { icon: "✨", name: "Implosion", desc: "Pulls all nearby enemies to Tigreal's location — perfect for ultimate setups." }
+    ]
+  },
+  {
+    id: 4, name: "Beatrix", role: "Marksman", tier: "S", icon: "🏹",
+    bg: "linear-gradient(135deg, #2e0a0a, #1a0a0a)",
+    tags: ["burst", "meta"],
+    stats: { offense: 88, mobility: 55, difficulty: 78, utility: 60 },
+    desc: "A unique marksman with 4 different weapon modes. Each weapon offers different damage types and ranges, making her extremely versatile.",
+    tips: ["Renner (Sniper) for long-range poke and objectives", "Bennett (Shotgun) for close-range burst and last-hitting", "Nibiru (Machine Gun) for sustained DPS in teamfights", "Switch weapons based on fight distance — read the situation"],
+    skills: [
+      { icon: "🎯", name: "Renner (Sniper)", desc: "High-range precision rifle for poking enemies and bursting priority targets." },
+      { icon: "💥", name: "Bennett (Shotgun)", desc: "Close-range burst weapon that deals massive damage in a cone." },
+      { icon: "🔫", name: "Nibiru (Machine Gun)", desc: "High fire rate sustained DPS weapon, ideal for prolonged teamfights." }
+    ]
+  },
+  {
+    id: 5, name: "Thamuz", role: "Fighter", tier: "A", icon: "🔥",
+    bg: "linear-gradient(135deg, #2e0a00, #1a0800)",
+    tags: ["burst", "meta"],
+    stats: { offense: 82, mobility: 60, difficulty: 45, utility: 65 },
+    desc: "A slow but ferocious fighter who dominates the Exp Lane. His spinning scythes make him extremely threatening in 1v1 duels.",
+    tips: ["Max Skill 2 first for the burn passive to proc", "Purchase Bloodlust Axe for massive lifesteal synergy", "Avoid ranged mages — engage only after their CC is used", "Use ultimate to sustain through teamfights"],
+    skills: [
+      { icon: "⚙️", name: "Grand Lord Lava", desc: "Passive that marks enemies with lava, causing burn damage over time." },
+      { icon: "🌀", name: "Chasm Trample", desc: "Slams down dealing AoE damage and activating the lava burn effect." },
+      { icon: "🔥", name: "Molten Scythes", desc: "Activates spinning scythes that deal continuous AoE damage and trigger all lava marks." }
+    ]
+  },
+  {
+    id: 6, name: "Estes", role: "Support", tier: "A", icon: "✨",
+    bg: "linear-gradient(135deg, #0a2e0a, #0a1a0a)",
+    tags: ["sup", "meta"],
+    stats: { offense: 30, mobility: 55, difficulty: 40, utility: 95 },
+    desc: "The premier healing support. Estes single-handedly keeps carries alive through sustained healing and can enable aggressive plays with his ultimate.",
+    tips: ["Always attach to your Marksman with Skill 1 for passive heal chain", "Use Ultimate to sustain your team through Lord teamfights", "Buy Fleeting Time to reduce ultimate cooldown", "Position safely — you're a priority target for assassins"],
+    skills: [
+      { icon: "🌿", name: "Scripture of the Moon Elves", desc: "Passive that builds up a magical mark on allies, chaining heals between linked teammates." },
+      { icon: "💧", name: "Blessing of the Moon Goddess", desc: "Attaches to an ally and continuously heals them over several seconds." },
+      { icon: "🌙", name: "Shared Blessing", desc: "AoE ultimate that heals all nearby allies continuously — game-changing in teamfights." }
+    ]
+  },
+  {
+    id: 7, name: "Hayabusa", role: "Assassin", tier: "A", icon: "⚡",
+    bg: "linear-gradient(135deg, #0a0a2e, #0a0a1a)",
+    tags: ["burst", "meta"],
+    stats: { offense: 88, mobility: 85, difficulty: 80, utility: 35 },
+    desc: "A highly mobile shadow assassin who dashes between shadow orbs and deals devastating burst with his ultimate.",
+    tips: ["Place all 3 orbs before engaging for maximum damage", "Use shadows to dodge targeted ultimates", "Max Skill 2 first for more shadow duplicates", "Counter heavy carry comps where eliminating 1 target wins fights"],
+    skills: [
+      { icon: "🌑", name: "Ninjutsu: Phantom Shuriken", desc: "Throws 3 shuriken that slow enemies and generate phantom orbs on the ground." },
+      { icon: "👤", name: "Ninjutsu: Quad Shadow", desc: "Dashes forward and leaves shadow orbs, repositioning between them freely." },
+      { icon: "🗡️", name: "Ougi: Shadow Kill", desc: "Targets an enemy and deals multiple phantom strikes, ignoring effects." }
+    ]
+  },
+  {
+    id: 8, name: "Hylos", role: "Tank", tier: "B", icon: "🐴",
+    bg: "linear-gradient(135deg, #0e1020, #101828)",
+    tags: ["tank"],
+    stats: { offense: 50, mobility: 65, difficulty: 40, utility: 88 },
+    desc: "A centaur tank who converts max HP into mana, making him incredibly durable. His chain ultimate is perfect for linking multiple enemies.",
+    tips: ["Build high HP — it also gives you mana", "Ultimate chains movement speed reduction to chasing enemies", "Use Skill 1 to lock down enemies escaping objectives", "Pair with high-damage teammates to maximize your CC value"],
+    skills: [
+      { icon: "🔗", name: "Thich Chains", desc: "Fires chains that link and slow enemies in a line." },
+      { icon: "💦", name: "Ring of Punishment", desc: "Creates a ring that continuously slows enemies inside it." },
+      { icon: "🐎", name: "Law and Order", desc: "Charges forward linked with a chain, pulling caught enemies along." }
+    ]
+  },
+  {
+    id: 9, name: "Lunox", role: "Mage", tier: "S", icon: "🌓",
+    bg: "linear-gradient(135deg, #1a0a2e, #0a0a1a)",
+    tags: ["burst", "meta"],
+    stats: { offense: 90, mobility: 70, difficulty: 75, utility: 60 },
+    desc: "A chaos/order mage who switches between two power states. In Chaos, she deals burst; in Order, she stacks shields. Her ultimate makes her untargetable.",
+    tips: ["Alternate between Chaos and Order skills to stack both powers", "Use Order ultimate to escape burst damage windows", "Chaos ultimate deals massive true damage — use it as execute", "Position aggressively — you're harder to kill than you look"],
+    skills: [
+      { icon: "🌑", name: "Starlight Pulse", desc: "Order mode: fires starlight AoE that reduces Chaos Stacks and heals based on Order stacks." },
+      { icon: "🌀", name: "Chaos Assault", desc: "Chaos mode: fires a twisting beam of dark energy dealing high magic damage." },
+      { icon: "✨", name: "Power of Order/Chaos", desc: "Toggles between Order (invincibility dash) and Chaos (blink + massive true damage)." }
+    ]
+  },
+  {
+    id: 10, name: "Leomord", role: "Fighter", tier: "A", icon: "🦁",
+    bg: "linear-gradient(135deg, #1a0f00, #0f0a00)",
+    tags: ["burst"],
+    stats: { offense: 85, mobility: 72, difficulty: 50, utility: 55 },
+    desc: "A powerful fighter who summons a spectral horse with his ultimate, massively boosting his combat stats and mobility.",
+    tips: ["Use Skill 2 to close the gap before activating ultimate", "Build Blade of Despair for maximum burst with horse form", "Avoid fights without ultimate cooldown available", "Chase fleeing enemies with mounted mobility — no one escapes"],
+    skills: [
+      { icon: "⚔️", name: "Momentum", desc: "Swings his sword in a wide arc dealing damage in front of him." },
+      { icon: "💨", name: "Decimation Assault", desc: "Charges forward and knocks enemies back with a heavy blow." },
+      { icon: "🐎", name: "Phantom Steed", desc: "Summons Barbiel, a spectral war horse, massively boosting stats and attack range." }
+    ]
+  },
+  {
+    id: 11, name: "Angela", role: "Support", tier: "S", icon: "💕",
+    bg: "linear-gradient(135deg, #2e0a1a, #1a0a10)",
+    tags: ["sup", "meta"],
+    stats: { offense: 55, mobility: 65, difficulty: 55, utility: 96 },
+    desc: "A puppet support who attaches herself to an ally, globally flying to their location and providing shields, heals, and crowd control.",
+    tips: ["Fly to your hyper carry BEFORE teamfights start", "Her hook (Skill 1) is one of the best CC tools for supports", "Buy Fleeting Time for faster ultimate cooldown", "Communicate with your carry before ult — coordinate dives"],
+    skills: [
+      { icon: "💖", name: "Love Waves", desc: "Fires a continuous beam that heals allies and slows enemies." },
+      { icon: "🎀", name: "Puppet-on-a-String", desc: "Launches a hook that roots and applies a stacking slow to an enemy." },
+      { icon: "🌟", name: "Heartguard", desc: "Flies to an ally from anywhere on the map and attaches, shielding them and enhancing their abilities." }
+    ]
+  },
+  {
+    id: 12, name: "Layla", role: "Marksman", tier: "B", icon: "🎯",
+    bg: "linear-gradient(135deg, #0a1f2e, #0a1520)",
+    tags: ["meta"],
+    stats: { offense: 72, mobility: 35, difficulty: 20, utility: 45 },
+    desc: "The perfect beginner marksman. Simple kit, long range, and high late-game damage. Excellent for learning positioning fundamentals.",
+    tips: ["Stay as far back as possible — your passive gives bonus damage from range", "NEVER engage — kite and shoot from max distance", "Buy Windtalker and Berserker Fury to spike your DPS", "You have no escape skills: always have a retreat path"],
+    skills: [
+      { icon: "🎆", name: "Malefic Bomb", desc: "Fires an energy bomb that deals damage and increases Layla's range and damage temporarily." },
+      { icon: "🔵", name: "Void Projectile", desc: "Launches a projectile that creates a zone dealing continuous damage." },
+      { icon: "💥", name: "Destruction Rush", desc: "Fires a massive global laser beam dealing heavy physical damage in a long line." }
+    ]
+  }
+];
+
+const builds = [
+  {
+    hero: "Kagura", role: "Mage", icon: "🔮", emblem: "Mage — Impure Rage", spell: "Flicker",
+    items: [
+      { icon: "💜", name: "Arcane Boots" },
+      { icon: "📚", name: "Clock of Destiny" },
+      { icon: "💎", name: "Lightning Truncheon" },
+      { icon: "🌀", name: "Ice Queen Wand" },
+      { icon: "🔵", name: "Necklace of Durance" },
+      { icon: "👑", name: "Holy Crystal" }
+    ],
+    note: "Stack Clock first for HP+Mana, then burst with Truncheon. Ice Queen applies slow for easier skill combos. Divine Glaive replaces Necklace vs full tank comps."
+  },
+  {
+    hero: "Ling", role: "Assassin", icon: "🗡️", emblem: "Assassin — High and Dry", spell: "Execute",
+    items: [
+      { icon: "👟", name: "Swift Boots" },
+      { icon: "⚡", name: "Endless Battle" },
+      { icon: "🗡️", name: "Hunter Strike" },
+      { icon: "🗡️", name: "Blade of Despair" },
+      { icon: "🔴", name: "Immortality" },
+      { icon: "🟡", name: "Malefic Roar" }
+    ],
+    note: "Endless Battle true damage synergizes perfectly with Ling's rapid skill casts. Execute finishes low HP targets he can't reach. Immortality keeps him alive after diving."
+  },
+  {
+    hero: "Tigreal", role: "Tank", icon: "🛡️", emblem: "Tank — Tenacity", spell: "Flicker",
+    items: [
+      { icon: "🥾", name: "Warrior Boots" },
+      { icon: "❄️", name: "Antique Cuirass" },
+      { icon: "🔵", name: "Cursed Helmet" },
+      { icon: "💚", name: "Oracle" },
+      { icon: "🌀", name: "Immortality" },
+      { icon: "🛡️", name: "Dominance Ice" }
+    ],
+    note: "Maximizes HP and resistance to survive diving into 5 enemies. Oracle amplifies his passive shield. Dominance Ice reduces nearby enemy attack speed — great vs marksman comps."
+  },
+  {
+    hero: "Beatrix", role: "Marksman", icon: "🏹", emblem: "Marksman — Weakness Finder", spell: "Inspire",
+    items: [
+      { icon: "👟", name: "Swift Boots" },
+      { icon: "🌪️", name: "Windtalker" },
+      { icon: "💛", name: "Berserker Fury" },
+      { icon: "🔴", name: "Blade of Despair" },
+      { icon: "🟡", name: "Malefic Roar" },
+      { icon: "🔵", name: "Immortality" }
+    ],
+    note: "Pure crit build for maximum late-game output. Use Inspire with Renner (sniper) for insane burst windows. Malefic Roar shreds tanks in the final item slot."
+  },
+  {
+    hero: "Thamuz", role: "Fighter", icon: "🔥", emblem: "Fighter — Festival of Blood", spell: "Vengeance",
+    items: [
+      { icon: "🥾", name: "Warrior Boots" },
+      { icon: "🔴", name: "Bloodlust Axe" },
+      { icon: "⚔️", name: "Hunter Strike" },
+      { icon: "🗡️", name: "Blade of Despair" },
+      { icon: "🟤", name: "Immortality" },
+      { icon: "🛡️", name: "Queen's Wings" }
+    ],
+    note: "Bloodlust Axe provides massive lifesteal that synergizes with his burn mechanics. Vengeance reflects damage while tanking. Queen's Wings lets him survive at low HP."
+  },
+  {
+    hero: "Angela", role: "Support", icon: "💕", emblem: "Support — Focusing Mark", spell: "Flicker",
+    items: [
+      { icon: "🥾", name: "Demon Shoes" },
+      { icon: "💜", name: "Courage Mask" },
+      { icon: "💚", name: "Oracle" },
+      { icon: "⏱️", name: "Fleeting Time" },
+      { icon: "🔵", name: "Necklace of Durance" },
+      { icon: "💛", name: "Athena's Shield" }
+    ],
+    note: "Fleeting Time is mandatory — reduces ultimate cooldown so you can attach globally more often. Oracle amplifies all healing. Necklace counters enemy healers like Estes."
+  }
+];
+
+// ═══════════════════════════════ RENDER ═══════════════════════════════
+
+function renderHeroes(filter = 'all') {
+  const grid = document.getElementById('heroesGrid');
+  const filtered = filter === 'all' ? heroes : heroes.filter(h => h.role === filter);
+  grid.innerHTML = filtered.map(h => `
+    <div class="hero-card" onclick="openHeroModal(${h.id})">
+      <div class="hero-card-img" style="background:${h.bg}">
+        <span style="position:relative;z-index:1">${h.icon}</span>
+        <span class="hero-tier-badge tier-${h.tier.toLowerCase()}">${h.tier}</span>
+      </div>
+      <div class="hero-card-body">
+        <div class="hero-card-name">${h.name}</div>
+        <div class="hero-card-role">${h.role}</div>
+        <div class="hero-card-tags">
+          ${h.tags.map(t => `<span class="tag tag-${t}">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderBuilds() {
+  const grid = document.getElementById('buildsGrid');
+  grid.innerHTML = builds.map(b => `
+    <div class="build-card">
+      <div class="build-card-header">
+        <div class="build-hero-icon">${b.icon}</div>
+        <div>
+          <div class="build-hero-name">${b.hero}</div>
+          <div class="build-hero-type">${b.role} Build</div>
+        </div>
+      </div>
+      <div class="build-card-body">
+        <div class="emblem-row">
+          <span class="emblem-badge">🏅 ${b.emblem}</span>
+          <span class="spell-badge">⚡ ${b.spell}</span>
+        </div>
+        <div class="build-label">// Core Items</div>
+        <div class="build-items">
+          ${b.items.map(item => `
+            <div class="build-item">
+              <span class="build-item-icon">${item.icon}</span>
+              <span class="build-item-name">${item.name}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div class="build-note">${b.note}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════ MODAL ═══════════════════════════════
+
+function openHeroModal(id) {
+  const h = heroes.find(x => x.id === id);
+  if (!h) return;
+  document.getElementById('modalIcon').textContent = h.icon;
+  document.getElementById('modalName').textContent = h.name;
+  document.getElementById('modalRole').textContent = `${h.role} · Tier ${h.tier}`;
+
+  const statsHtml = Object.entries(h.stats).map(([k, v]) => `
+    <div class="stat-row">
+      <span class="stat-row-label">${k.charAt(0).toUpperCase()+k.slice(1)}</span>
+      <div class="stat-bar-bg"><div class="stat-bar-fill" style="width:${v}%"></div></div>
+      <span class="stat-row-val">${v}</span>
+    </div>
+  `).join('');
+
+  const tipsHtml = h.tips.map(t => `<li>${t}</li>`).join('');
+  const skillsHtml = h.skills.map(s => `
+    <div class="skill-item">
+      <div class="skill-icon">${s.icon}</div>
+      <div class="skill-info">
+        <h5>${s.name}</h5>
+        <p>${s.desc}</p>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('modalBody').innerHTML = `
+    <p style="color:var(--muted);font-size:0.92rem;font-weight:500;line-height:1.7;margin-bottom:0">${h.desc}</p>
+    <h4>// Stats</h4>
+    <div class="stat-bars">${statsHtml}</div>
+    <h4>// Skills</h4>
+    <div class="skill-grid">${skillsHtml}</div>
+    <h4>// Pro Tips</h4>
+    <ul class="tip-list">${tipsHtml}</ul>
+  `;
+
+  document.getElementById('heroModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('heroModal') || e.currentTarget.classList.contains('modal-close')) {
+    document.getElementById('heroModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+// ═══════════════════════════════ NAVIGATION ═══════════════════════════════
+
+function showSection(id, linkEl) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (linkEl) linkEl.classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'heroes') renderHeroes();
+  if (id === 'builds') renderBuilds();
+}
+
+function filterHeroes(role, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderHeroes(role);
+}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+function showTutTab(tab, btn) {
+  document.querySelectorAll('.tut-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tut-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// ESC key closes modal
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(e); });
+
+// Active nav tracking on load
+document.querySelectorAll('.nav-links a')[0].classList.add('active');
+</script>
+</body>
+</html>
